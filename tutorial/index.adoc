@@ -1,0 +1,444 @@
+////
+NO CAMBIAR!!
+Codificación, idioma, tabla de contenidos, tipo de documento
+////
+:encoding: utf-8
+:lang: es
+:toc: right
+:toc-title: Tabla de contenidos
+:doctype: book
+:imagesdir: ./images
+
+////
+Nombre y título del trabajo
+////
+# Git. Control de versiones y trabajo colaborativo
+Cloud-DI Team - Departamento de Informática. UAL
+
+image::di.png[]
+
+// NO CAMBIAR!! (Entrar en modo no numerado de apartados)
+:numbered!: 
+
+
+[abstract]
+== Resumen
+////
+COLOCA A CONTINUACION EL RESUMEN
+////
+$$$
+
+
+////
+COLOCA A CONTINUACION LOS OBJETIVOS
+////
+.Objetivos
+* Introducir la necesidad del control de versiones
+* Aprender a usar las operaciones y flujos básicos de Git en repositorios locales y remotos
+* Conocer las principales plataformas Git online actuales
+* Aprender a trabajar de forma colaborativa con Git
+
+
+// Entrar en modo numerado de apartados
+:numbered:
+
+## Introducción
+
+### Qué es Git
+[quote,https://git-scm.com/]
+____
+Git is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+____
+
+[NOTE]
+====
+https://git-scm.com/[Sitio oficial] (Descargas, documentación, ...): 
+====
+
+### Plataformas Git online
+
+* https://github.com/[GitHub], el más popular, ofrece repos públicos. También ofrece un plan de repos privados para docencia
+* https://bitbucket.org/[BitBucket] es otra alternativa (permite repos privados)
+* https://gitlab.com/[GitLab] ofrece repositorios privados y ofrece una versión _Community_ para instalar on-premise
+
+.Diferencias básicas entre el modelo privado de GitHub y BitBucket
+
+****
+** GitHub: Limita el número de repos. Usuarios ilimitados
+** BitBucket: Limita el número de usuarios. Repos ilimitados
+****
+
+### gitlabdoc.ual.es
+
+* Repos privados y recursos propios
+* Acceso vía LDAP con login y pass de Campus virtual
+
+image:gitlabdoc.png[]
+
+## Operaciones básicas con repositorios locales
+
+### Configuración local
+
+Cada commit irá firmado con nuestro email y nombre.
+
+[source, bash]
+----
+$ git config --global user.email "mtorres@ual.es"
+$ git config --global user.name "Manuel Torres Gil"
+----
+
+Configuración almacenada en `~/.gitconfig`
+
+### `git init`
+
+Crea un repo local *en la carpeta de proyecto*
+
+Creamos carpeta para pruebas denominada `holagit` y entramos a ella.
+
+[source, bash]
+----
+$ git init
+Initialized empty Git repository in C:/Users/Administrator/holagit/.git/
+
+----
+
+### _Working dir_, _Staging Area_ y Repo
+
+image:stagingarea.svg[]
+
+Otra forma de verlo
+
+image:addcommit.png[]
+
+### Crear un archivo de ejemplo
+
+`README.md`
+
+[source, md]
+----
+# Hola Git
+
+Este es mi primer archivo para control de versiones.
+----
+
+### `git status`
+
+Muestra las diferencias entre el _Working dir_, la _Staging Area_ y el repo.
+
+[source, bash]
+----
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+----
+
+### `git add`
+
+Añade desde _Working dir_ a _Staging area_ (index)
+
+La sintaxis es `git add _files_`
+
+Algunos ejemplos:
+
+[source, bash]
+----
+$ git add README.md
+$ git add .
+$ git add --all
+----
+
+Vemos los cambios con `git status` para ver cómo ha pasado a la _Staging area_ y está listo para pasarlo al repositorio.
+
+[source, bash]
+----
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   README.md
+----
+
+### `git commit`
+
+Añade desde _Staging Area_ al repo
+
+La sintaxis es `git commit -m commitText`
+
+[source, bash]
+----
+$ git commit -m "README.md creado"
+[master (root-commit) 1f86692] README.md creado
+ 1 file changed, 3 insertions(+)
+ create mode 100644 README.md
+----
+
+Podemos ver el estado con `git status`
+
+[source, bash]
+----
+$ git status
+On branch master
+nothing to commit, working tree clean
+----
+
+### `git blame` 
+
+Quién ha cambiado un archivo y cuándo
+
+[source, bash]
+----
+$ git blame README.md
+^1f86692 (Manuel Torres Gil 2018-11-27 17:39:47 +0000 1) # Hola Git
+^1f86692 (Manuel Torres Gil 2018-11-27 17:39:47 +0000 2)
+^1f86692 (Manuel Torres Gil 2018-11-27 17:39:47 +0000 3) Este es mi primer archivo para control de versiones.
+----
+
+### `git log`
+
+Muestra los comentarios comenzando por el más reciente.
+
+[source, bash]
+----
+$ git log
+$ git log --oneline <1>
+----
+<1> Versión compacta
+
+[TIP]
+====
+Más información sobre la presentación de logs en: https://stackoverflow.com/questions/1441010/the-shortest-possible-output-from-git-log-containing-author-and-date
+====
+
+[source, bash]
+----
+$ git log <1>
+commit 1f8669231adc380d96261f91495018ba2791b0b3 (HEAD -> master)
+Author: Manuel Torres Gil <mtorres@ual.es>
+Date:   Tue Nov 27 17:39:47 2018 +0000
+
+    README.md creado
+
+$ git log --oneline <2>
+1f86692 (HEAD -> master) README.md creado
+----
+<1> Versión normal
+<2> Versión compacta
+
+### Ejercicio
+
+. Añadir una línea nueva al archivo `README.md` con el texto que aparece a continuación
++
+[source]
+----
+# Aprende latín
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+----
++
+. Añadir los cambios a la _Staging area_ 
+. Añadir los cambios al repositorio con el mensaje `Nuevo epígrafe`
+. Mostrar el log
+. Obtener el estado del repositorio
+
+Se debería obtener algo similar a lo siguiente
+
+[source]
+----
+$ git log <1>
+commit 706c9ab817425ea714b758cbcf7934dcf0a6ecb4 (HEAD -> master)
+Author: Manuel Torres Gil <mtorres@ual.es>
+Date:   Tue Nov 27 17:55:13 2018 +0000
+
+    Nuevo epígrafe <2>
+
+commit 1f8669231adc380d96261f91495018ba2791b0b3
+Author: Manuel Torres Gil <mtorres@ual.es>
+Date:   Tue Nov 27 17:39:47 2018 +0000
+
+    README.md creado
+
+$ git status <3>
+On branch master
+nothing to commit, working tree clean
+----
+<1> Mostrando los cambios
+<2> El nuevo `commit` aparece el primero
+<3> Mostrando el estado
+
+## Operaciones básicas con repositorios remotos
+
+### Configuración de claves SSH en `gitlabdoc.ual.es`
+
+Las claves SSH evitan introducir login y pass en cada operación de subida al repositorio remoto (`push`)
+
+En GitLab, cada usuario tiene que modificar sus `Settings` en `Profile Settings -> SSK Keys -> Add SSH Key`: 
+
+#### Crear SSH Key
+
+Desde una terminal ejecutaremos
+
+[source, bash]
+----
+$ ssh-keygen
+----
+
+Esto genera dos archivos:
+
+* Clave privada: `id_rsa`
+* Clave pública: `id_rsa.pub`
+
+#### Actualizar SSH Key en GitLab
+
+Copiar el contenido de la clave pública `id_rsa.pub` en GitLab y asignarle un nombre
+
+`$ cat ~/.ssh/id_rsa.pub`
+
+image:addsshkey.png[]
+
+### `git clone`
+
+Clona un repo remoto (_bare_) en nuestro equipo
+
+image:clone.png[]
+
+[IMPORTANT]
+====
+Si el repositorio clonado es nuestro podremos propagar posteriormente los cambios del repositorio local al repositorio remoto. En cambio, si el repositorio no es nuestro **sólo podremos subir cambios al repositorio remoto si nos autorizan a ello**.
+====
+
+._Merge requests_ y _Pull requests_
+****
+Una forma de colaboración que veremos más adelante consiste en crear una copia del proyecto remoto. Esta operación se conoce como *_Fork_*. Al hacer un _fork_ se crea un repositorio remoto de nuestra propiedad, el cual es copia del repositorio original.
+
+Para solicitar que nuestros cambios puedan ser considerados para pasar al proyecto original realizaremos una _Merge request_ en GitLab (_Pull request_ en GitHub). Esto inicia un proceso de revisión que finaliza con la aceptación, rechazo (o ignoando) de nuestros cambios por parte del propietario del repositorio remoto original.
+****
+
+### Ejemplo
+
+. Crear repo `prueba` en GitLab 
+. Clonar repo remoto en la carpeta del usuario que estés usando `git clone _URL_` *usando el protocolo SSH*. 
++
+[NOTE]
+====
+Actualmente, hay un detalle sobre la identificación del certificado que usa `gitlabdoc.ual.es` al clonar con el protocolo mediante HTTPS. Si recibes este mensaje de error:
+
+[source, text]
+----
+server certificate verification failed. CAfile: /etc/ssl/certs/ca-certificates.crt CRLfile: none
+----
+
+puedes salir del paso desactivando la verificación del certificado con este comando:
+
+[source, text]
+----
+$ git config --global http.sslverify false
+----
+====
++
+. Entrar al directorio del nuevo proyecto y crear archivo `README.md` con el texto que aparece a continuación
++
+[source]
+----
+# Git
+
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+----
++
+. Añadir los cambios a la _staging area_
+. Añadir los cambios al repositorio con el mensaje `Commit inicial`
+
+Al mostrar los cambios de aparecer algo similar a esto:
+
+[source ,bash]
+----
+$ git log
+commit 6aabc98f79034f3ea505b33bead4fa807e5ee59d (HEAD -> master)
+Author: Manuel Torres Gil <mtorres@ual.es>
+Date:   Tue Nov 27 18:14:20 2018 +0000
+
+    Commit inicial
+----
+
+### `git push`
+
+Envia los cambios del repositorio local a un repo remoto
+
+`git push _remoto_ _ramaLocal_`
+
+En nuestro ejemplo haríamos `git push origin master`
+
+[NOTE]
+====
+`origin` es el alias que damos al repositorio remoto. `master` es la rama que contiene los _commits_ que queremos subir. Al hacer `push` se subirán todos los _commits_ pendientes de sincronizarse con el repositorio remoto.
+====
+
+Tras hacer el `push` se debe obtener algo similar a esto:
+
+[source, bash]
+----
+$ git push origin master
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 337 bytes | 168.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To gitlabdoc.ual.es:mtorres/prueba.git <1>
+ * [new branch]      master -> master <2>
+----
+<1> Repositorio remoto al que se suben los cambios (`origin`).
+<2> Crea la rama `master` en el repositorio remoto ya que antes no estaba.
+
+[TIP]
+====
+En el archivo `.git/config` de la carpeta de trabajo está la URL con la que se corresponde `origin`.
+
+Si tenemos dos repositorios remotos con los que sincronizar, añadiríamos una segunda URL en la sección de `[remote "origin"]`
+====
+
+## Escenario colaborativo basado en control de acceso
+
+El propietario del proyecto añade nuevos miembros configurando sus privilegios.
+
+En GitLab, en la propiedades del proyecto añadimos miembros al proyecto indicando sus privilegios (_guest, reporter, developer, master_) en función de las operaciones permitidas.
+
+image:addmembers.png[]
+
+A continuación, se especifican las ramas en las que están autorizados a subir cambios (Desproteger ramas).
+
+En GitLab, en las propiedades del proyecto seleccionamos `Settings -> Protected Branches` 
+
+image:unprotectbranch.png[]
+
+Por último, se selecciona la rama y se indica que los desarrolladores pueden realizar `push` 
+
+image:allowpush.png[]
+
+## Escenario colaborativo basado en `merge requests` (`pull requests` en GitHub)
+
+image:colaboracion.png[]
+
+### `origin` y `upstream`
+
+image:upstream.png[]
+
+## Recursos de interés
+
+* GUI
+** Para Windows y Mac, SourceTree https://www.sourcetreeapp.com[SourceTree] (Atlassian) es muy buena opción
+** Para Windows, Linux y Mac, https://www.collab.net/products/giteye[GitEye] (Collabnet) también es una opción a considerar.
+
+* http://files.zeroturnaround.com/pdf/zt_git_cheat_sheet.pdf[Git cheat sheet]
+* Tutorial: http://gitimmersion.com[Git Immersion]

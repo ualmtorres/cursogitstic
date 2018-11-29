@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>A ver si te reconoces</h1>
+					<h4>Taller Git STIC - Noviembre-Diciembre 2018</h4>
+				</section>
+				<section>
+					<h1>Primer patrón</h1>
+				</section>
+				<section>
+					<code class="hljs">archivo.txt</code>
+				</section>
+				<section>
+					<code class="hljs">archivo1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>
+				<section>
+					<code class="hljs">archivo-bis.txt</code><br/>
+					<code>archivo-1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>
+				<section>
+					<code class="hljs">archivo-bis2.txt</code><br/>
+					<code>archivo-bis.txt</code><br/>
+					<code>archivo-1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>
+				<section>
+					<code class="hljs">archivo-bis3.txt</code><br/>
+					<code>archivo-bis2.txt</code><br/>
+					<code>archivo-bis.txt</code><br/>
+					<code>archivo-1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>
+				<section>
+					<code class="hljs">archivo-bueno.txt</code><br/>
+					<code>archivo-bis3.txt</code><br/>
+					<code>archivo-bis2.txt</code><br/>
+					<code>archivo-bis.txt</code><br/>
+					<code>archivo-1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>
+				<section>
+					<code class="hljs">archivo-bueno-bueno.txt</code><br/>
+					<code>archivo-bueno.txt</code><br/>
+					<code>archivo-bis3.txt</code><br/>
+					<code>archivo-bis2.txt</code><br/>
+					<code>archivo-bis.txt</code><br/>
+					<code>archivo-1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>
+				<section>
+					<code class="hljs">archivo-de-hoy.txt</code><br/>
+					<code>archivo-bueno-bueno.txt</code><br/>
+					<code>archivo-bueno.txt</code><br/>
+					<code>archivo-bis3.txt</code><br/>
+					<code>archivo-bis2.txt</code><br/>
+					<code>archivo-bis.txt</code><br/>
+					<code>archivo-1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>																
+				<section>
+					<code class="hljs">archivo-y-a-ver-ahora-que.txt</code><br/>
+					<code>archivo-de-hoy.txt</code><br/>
+					<code>archivo-bueno-bueno.txt</code><br/>
+					<code>archivo-bueno.txt</code><br/>
+					<code>archivo-bis3.txt</code><br/>
+					<code>archivo-bis2.txt</code><br/>
+					<code>archivo-bis.txt</code><br/>
+					<code>archivo-1.txt</code><br/>
+					<code>archivo.txt</code>
+				</section>
+				<section>
+					<h1>Segundo patrón</h1>
+				</section>
+				<section>
+					<a href = "https://www.youtube.com/embed/QNTZbJSQVis" ><img src="images/la-he-liao-parda.jpg"></img></a>
+				</section>				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

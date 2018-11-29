@@ -1,0 +1,26 @@
+////
+NO CAMBIAR!!
+Codificación, idioma, tabla de contenidos, tipo de documento
+////
+:encoding: utf-8
+:lang: es
+:doctype: book
+
+////
+Nombre y título del trabajo
+////
+# Curso Git STIC - Noviembre 2018
+Cloud-DI Team - Departamento de Informática. UAL
+
+image::tutorial/images/di.png[]
+
+// NO CAMBIAR!! (Entrar en modo no numerado de apartados)
+:numbered!: 
+
+Git es un sistema de control de versiones ampliamente extendido que nos ayudará en el trabajo diario de mantener las versiones del código fuente en un entorno de trabajo colaborativo.
+
+A continuación esta disponible el material del Curso del introducción al uso básico de Git para el STIC de la UAL.
+
+* link:motivacion/index.html[Motivación]
+* link:tutorial/index.html[Tutorial]
+
