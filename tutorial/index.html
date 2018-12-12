@@ -957,6 +957,33 @@ nothing to commit, working tree clean</code></pre>
 </li>
 <li>
 <p>Clonar repo remoto en la carpeta del usuario que estés usando <code>git clone <em>URL</em></code> <strong>usando el protocolo SSH</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Actualmente, hay un detalle sobre la identificación del certificado que usa <code>gitlabdoc.ual.es</code> al clonar con el protocolo mediante HTTPS. Si recibes este mensaje de error:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text" data-lang="text">server certificate verification failed. CAfile: /etc/ssl/certs/ca-certificates.crt CRLfile: none</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>puedes salir del paso desactivando la verificación del certificado con este comando:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text" data-lang="text">$ git config --global http.sslverify false</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p>Entrar al directorio del nuevo proyecto y crear archivo <code>README.md</code> con el texto que aparece a continuación</p>
@@ -1137,7 +1164,7 @@ To gitlabdoc.ual.es:mtorres/prueba.git <i class="conum" data-value="1"></i><b>(1
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-27 22:13:24 CET
+Last updated 2018-12-12 16:25:19 CET
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
